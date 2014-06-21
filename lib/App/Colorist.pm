@@ -21,14 +21,21 @@ use IPC::Open3;
 
 This documentation is primarily concerned with the installation of the application and giving an in-depth description  of the configuration of colorist rulesets and colorsets. For more information about the command-line options, see L<colorist>.
 
-B<Installed Beware.> This application is still early in development, so please be aware that any upgrade might drastically change the way the program is used.
+B<Installer Beware.> This application is still early in development, so please be aware that any upgrade might drastically change the way the program is used.
 
 =cut
+
+has configuration => (
+    is          => 'ro',
+    isa         => 'Str',
+    required    => 1,
+);
 
 has ruleset => (
     is          => 'ro',
     isa         => 'Str',
     required    => 1,
+    default     => 'rules',
 );
 
 has colorset => (
@@ -114,10 +121,11 @@ sub _build__colorizer {
     # Otherwise, we use the default input reading from ARGV
 
     return App::Colorist::Colorizer->new(
-        ruleset  => $self->ruleset,
-        colorset => $self->colorset,
-        include  => $self->include,
-        debug    => $self->debug,
+        configuration => $self->configuration,
+        ruleset       => $self->ruleset,
+        colorset      => $self->colorset,
+        include       => $self->include,
+        debug         => $self->debug,
         %params,
     );
 }

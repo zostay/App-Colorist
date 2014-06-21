@@ -48,11 +48,11 @@ seek $infh, 0, 0;
 my $outfh = tempfile;
 
 my $colorizer = App::Colorist::Colorizer->new(
-    ruleset => 'test',
-    include => [ 't/rules' ],
-    debug   => 1,
-    inputs  => [ $infh ],
-    output  => $outfh,
+    configuration => 'test',
+    include       => [ 't/rules' ],
+    debug         => 1,
+    inputs        => [ $infh ],
+    output        => $outfh,
 );
 
 $colorizer->run;

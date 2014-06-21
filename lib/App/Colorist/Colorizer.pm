@@ -13,7 +13,7 @@ use YAML;
 =head1 SYNOPSIS
 
   my $colorizer = App::Colorist::Colorizer->enw(
-      ruleset => 'mycommand',
+      commandset => 'mycommand',
   );
   $colorizer->run;
 
@@ -25,6 +25,18 @@ If you do provide extensions, I would love to see them. Patches are welcome.
 
 =head1 ATTRIBUTES
 
+=head2 configuration
+
+This is the name of the master configuration to use. This is usually the name of the command whose output you are colorizing. Each configuration must contain at least one ruleset and one colorset configuration. See L<App::Colorist/CONFIGURATION> for details on how this is used to locate the configuration files.
+
+=cut
+
+has configuration => (
+    is          => 'ro',
+    isa         => 'Str',
+    required    => 1,
+);
+
 =head2 ruleset
 
 This is the name of the rule set to use. See L<App::Colorist/CONFIGURATION> for how rule sets are defined and located.
@@ -35,6 +47,7 @@ has ruleset => (
     is          => 'ro',
     isa         => 'Str',
     required    => 1,
+    default     => 'rules',
 );
 
 =head2 colorset
@@ -193,18 +206,19 @@ has ruleset_file => (
 sub _build_ruleset_file {
     my $self = shift;
 
+    my $config  = $self->configuration;
     my $ruleset = $self->ruleset;
 
     my $path = $self->first_path_that(sub {
-        return 0 unless -d "$_/$ruleset";
-        return 1 if -f "$_/$ruleset/rules.pl";
+        return 0 unless -d "$_/$config";
+        return 1 if -f "$_/$config/$ruleset.pl";
         return 0;
     });
 
     croak(qq[Unable to locate rules "$ruleset" in paths: ], join(' ', $self->all_search_paths))
         unless defined $path;
 
-    return "$path/$ruleset/rules.pl";
+    return "$path/$config/$ruleset.pl";
 }
 
 =head2 colorset_file
@@ -222,19 +236,19 @@ has colorset_file => (
 sub _build_colorset_file {
     my $self = shift;
 
-    my $ruleset  = $self->ruleset;
+    my $config   = $self->configuration;
     my $colorset = $self->colorset;
 
     my $path = $self->first_path_that(sub {
-        return 0 unless -d "$_/$ruleset";
-        return 1 if -f "$_/$ruleset/$colorset.yml";
+        return 0 unless -d "$_/$config";
+        return 1 if -f "$_/$config/$colorset.yml";
         return 0;
     });
 
     croak(qq[Unable to locate colors "$colorset" in paths: ], join(' ', $self->all_search_paths))
         unless defined $path;
 
-    return "$path/$ruleset/$colorset.yml";
+    return "$path/$config/$colorset.yml";
 }
 
 =head2 colors_mtime
