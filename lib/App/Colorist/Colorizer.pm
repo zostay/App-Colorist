@@ -345,9 +345,15 @@ sub load_ruleset_file {
     my $self = shift;
 
     my $ruleset_file = $self->ruleset_file;
-    my $rules = do "$ruleset_file"
-        or croak(qq[Failed to read rule set "$ruleset_file": $@]);
-    push @$rules, qr{.*}, [ 'DEFAULT' ];
+    my $rules;
+
+    {
+        package ruleset;
+        use App::Colorist::Ruleset;
+        $rules = do "$ruleset_file"
+            or croak(qq[Failed to read rule set "$ruleset_file": $@]);
+        push @$rules, qr{.*}, [ 'DEFAULT' ];
+    }
 
     return $rules;
 }
