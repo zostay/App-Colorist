@@ -28,13 +28,24 @@ B<Installer Beware.> This application is still early in development, so please b
 has configuration => (
     is          => 'ro',
     isa         => 'Str',
-    required    => 1,
+    traits      => [ 'Getopt' ],
+    cmd_aliases => [ qw(c) ],
+    lazy_build  => 1,
 );
+
+sub _build_configuration {
+    my $self = shift;
+
+    return $self->extra_argv->[0] if $self->execute;
+    return;
+}
 
 has ruleset => (
     is          => 'ro',
     isa         => 'Str',
     required    => 1,
+    traits      => [ 'Getopt' ],
+    cmd_aliases => [ qw(R) ],
     default     => 'rules',
 );
 
@@ -42,6 +53,8 @@ has colorset => (
     is          => 'ro',
     isa         => 'Str',
     required    => 1,
+    traits      => [ 'Getopt' ],
+    cmd_aliases => [ qw(C) ],
     default     => 'colors',
 );
 
@@ -49,6 +62,8 @@ has include => (
     is          => 'ro',
     isa         => 'ArrayRef',
     required    => 1,
+    traits      => [ 'Getopt' ],
+    cmd_aliases => [ qw(I) ],
     default     => sub { [] },
 );
 
@@ -62,14 +77,22 @@ has debug => (
 has execute => (
     is          => 'ro',
     isa         => 'Bool',
-    required    => 1,
-    default     => 0,
+    traits      => [ 'Getopt' ],
+    cmd_aliases => [ qw(e) ],
+    lazy_build  => 1,
 );
+
+sub _build_execute {
+    my $self = shift;
+    return $self->stderr ? 1 : 0;
+}
 
 has stderr => (
     is          => 'ro',
     isa         => 'Bool',
     required    => 1,
+    traits      => [ 'Getopt' ],
+    cmd_aliases => [ qw(E) ],
     default     => 0,
 );
 
@@ -81,13 +104,6 @@ has stderr => (
 #     default     => 0,
 # );
 
-has parallel => (
-    is          => 'ro',
-    isa         => 'Bool',
-    required    => 1,
-    default     => 0,
-);
-
 has _colorizer => (
     reader      => 'colorizer',
     isa         => 'App::Colorist::Colorizer',
@@ -98,7 +114,7 @@ has _colorizer => (
 sub _build__colorizer {
     my $self = shift;
 
-    my @args = @{ $self->extra_arg };
+    my @args = @{ $self->extra_argv };
 
     my %params;
 
