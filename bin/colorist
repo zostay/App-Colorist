@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+use App::Colorist;
+
+my $app = App::Colorist->new_with_options;
+$app->run;

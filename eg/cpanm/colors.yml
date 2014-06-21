@@ -1,0 +1,19 @@
+---
+maintask: yellow
+fetchtask: silver
+configtask: silver
+buildtask: silver
+success: lime
+founddeps: silver
+distsinstalled: white
+uptodate: silver
+
+module: fuschia
+url: teal
+status: white
+release: fuschia
+version: fuschia
+modulelist: fuschia
+counter: lime
+
+DEFAULT: red
