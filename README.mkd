@@ -1,0 +1,53 @@
+# Colorist
+
+This is a small Perl application for adding color to plain old output. This may
+be configuration files or just program output. The highlighting is line-based,
+so if that doesn't work well with your output... umm... too bad? I mean, patches are
+welcome!
+
+## Quickstart Guide
+
+Here's the quick way to get started.
+
+    # install colorist
+    cpanm App::Colorist
+  
+    # clone the shared configuration from github
+    git clone git://github.com/zostay/dot-colorist.git ~/.colorist
+  
+    # update your bashrc to setup the aliases you need
+    echo 'source $HOME/.colorist/bashrc' > ~/.bashrc
+
+After you are done you can logout and log back in or run:
+
+    source ~/.colorist/bashrc
+
+After that, you can update your configuration to the latest just by pulling the
+latest configuration from github:
+
+    # make sure colorist is up-to-date first
+    cpanm App::Colorist
+  
+    # update your configuration
+    cd ~/.colorist
+    git pull
+
+For more information on how to write configurations, you can use the
+documentation that comes with the command to learn more:
+
+    # for command-line options and environment variables
+    perldoc colorist
+  
+    # for information on configuration
+    perldoc App::Colorist
+  
+    # for information on tools available to rulesets
+    perldoc App::Colorist::Ruleset
+  
+    # for information on extending or embedding colorist in other Perl applications
+    perldoc App::Colorist::Colorizer
+
+Please report issues here or on CPAN RT if you have any problems with the
+application.
+
+Pull requests are welcome!
