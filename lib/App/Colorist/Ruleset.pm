@@ -27,6 +27,8 @@ sub rule {
     push @$BUILDING_RULESET, $regex, \@names;
 }
 
+1;
+__END__
 =head1 SYNOPSIS
 
   ruleset {
@@ -61,5 +63,3 @@ After the regular expression, you must include a list of color names to assign e
 It is perfectly acceptable to use nested matches. As of this writing, there must be a fixed number of group matches, though. If you need to match groups like C<< (...)* >>, there's no way to name them at this time, so don't do that.
 
 =cut
-
-1;

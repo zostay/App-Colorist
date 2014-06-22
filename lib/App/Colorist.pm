@@ -204,7 +204,9 @@ The other way to modify the search order is using the C<--include> (or C<-I>) op
 
 The search paths are parent configuration I<directories>, which may each contain zero or more named configurations.
 
-B<N.B.> The search order of directories is currently experimental and could change.
+It is important to note that a ruleset might be loaded from a different directory than the colorset. This allows a user to define a set of colors in their own F<~/.colorist> directory that has been altered to match their preferences, while the ruleset is loaded from F</etc/colorist> or somewhere else.
+
+B<N.B.> The search order of directories is currently experimental and could change. Currently, the search order is to prefer (from most prefered to list) configuration in this order: (1) paths added using the C<--include> option on the command-line, (2) paths set in the C<COLORIST_CONFIG> environment variable, (3) F<~/.colorist>, and (4) F</etc/colorist>.
 
 =head2 Named Configuration Directory
 
