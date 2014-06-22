@@ -5,7 +5,7 @@ use Moose;
 use Carp;
 use IO::Handle;
 use IO::Select;
-use POSIX qw( :errno_h );
+use POSIX;
 use Readonly;
 use Scalar::Util qw( refaddr );
 use YAML;
@@ -613,7 +613,7 @@ sub readline {
             do {
                 $eof = sysread($fh, $buffer, 1024);
                 if (not defined $eof) {
-                    if ($! == EAGAIN) {
+                    if ($! == POSIX::EAGAIN) {
                         select undef, undef, undef, 0.1;
                         next;
                     }

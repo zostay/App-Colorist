@@ -349,6 +349,12 @@ B<RGB color.> The final option is to use a 3-tuple (an array with 3 elements) to
 
 There can be multiple colorsets for each named configuration. This allows for different themes to be used for different circumstances or different preferences.
 
+=begin Pod::Coverage
+
+    BUILD
+
+=end Pod::Coverage
+
 =cut
 
 __PACKAGE__->meta->make_immutable;
