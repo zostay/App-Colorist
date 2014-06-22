@@ -1,4 +1,5 @@
 package App::Colorist::Ruleset;
+
 use Moose ();
 use Moose::Exporter;
 

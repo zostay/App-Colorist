@@ -1,4 +1,5 @@
 package App::Colorist;
+
 use Moose;
 
 with 'MooseX::Getopt';

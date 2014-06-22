@@ -1,4 +1,5 @@
 package App::Colorist::Colorizer;
+
 use Moose;
 
 use Carp;
@@ -348,7 +349,8 @@ sub load_ruleset_file {
     my $rules;
 
     {
-        package ruleset;
+        package 
+            ruleset;
         use App::Colorist::Ruleset;
         $rules = do "$ruleset_file"
             or croak(qq[Failed to read rule set "$ruleset_file": $@]);
