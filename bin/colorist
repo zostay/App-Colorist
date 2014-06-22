@@ -4,6 +4,7 @@ use warnings;
 
 use App::Colorist;
 
+# PODNAME: colorist
 # ABSTRACT: Add colors to your plain old output
 
 my $app = App::Colorist->new_with_options;
