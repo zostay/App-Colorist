@@ -5,6 +5,7 @@ use Moose;
 use Carp;
 use IO::Handle;
 use IO::Select;
+use POSIX qw( :errno_h );
 use Readonly;
 use Scalar::Util qw( refaddr );
 use YAML;
@@ -611,6 +612,15 @@ sub readline {
             my ($eof, $buffer);
             do {
                 $eof = sysread($fh, $buffer, 1024);
+                if (not defined $eof) {
+                    if ($! == EAGAIN) {
+                        select undef, undef, undef, 0.1;
+                        next;
+                    }
+                    else {
+                        croak("Error while reading handle: $!");
+                    }
+                }
                 $line .= $buffer;
             } while ($eof != 0 && $line !~ /\n/);
 
