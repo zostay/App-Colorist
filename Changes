@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.141740  2014-06-23 14:44:14-05:00 America/Chicago
+
     * Bugfix: Fixes installation failure with some versions of Readonly.
 
 0.141730  2014-06-22 15:36:00-05:00 America/Chicago
