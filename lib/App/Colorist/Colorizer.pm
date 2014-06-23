@@ -374,7 +374,7 @@ sub refresh_ruleset_file {
     }
 }
 
-Readonly my %color_names = (
+Readonly my %color_names => (
     black  => 0, gray    => 8,
     maroon => 1, red     => 9,
     green  => 2, lime    => 10,
