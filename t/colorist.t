@@ -7,6 +7,11 @@ use Test::More;
 
 use_ok('App::Colorist');
 
+if ($^O eq 'MSWin32') {
+    fail("This module does not work on Windows. Patches welcome.");
+    die;
+}
+
 my $input = "Starting foo...
 
 Nginx is running on: http://12.12.12.12:1234/

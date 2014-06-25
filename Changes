@@ -1,5 +1,9 @@
 {{$NEXT}}
 
+    * Bugfix: "Fixes" a problem with colorist.t hanging on Win32. The fix is
+      that it detects that the system is MSWin32 and dies. I have made no effort
+      to make this work on Win32.
+
 0.141740  2014-06-23 14:44:14-05:00 America/Chicago
 
     * Bugfix: Fixes installation failure with some versions of Readonly.
