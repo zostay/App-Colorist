@@ -715,8 +715,8 @@ sub colorize {
                 || ($a->[1] eq 'Y' and $b->[1] eq 'Y' ? $b->[2] <=> $a->[2] # X? name index (asc)
                     :                                    $a->[2] <=> $b->[2]) # Y? XY? YX? index (desc)
             } (
-                (map { [ $-[$_], 'X', $_ ] } 0 .. $#- ),
-                (map { [ $+[$_], 'Y', $_ ] } 0 .. $#+ ),
+                (map { [ ($-[$_] // 0), 'X', $_ ] } 0 .. $#- ),
+                (map { [ ($+[$_] // 0), 'Y', $_ ] } 0 .. $#+ ),
             );
             @pos = ([ 0, 'X', undef ], @pos, [ length, 'Y', undef ]);
             #warn YAML::Dump(\@pos);

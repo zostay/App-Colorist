@@ -1,5 +1,8 @@
 {{$NEXT}}
 
+    * Bugfix: Optional matches can leave indexes in @- and @+ as undef, which
+      caused colorist to spew ugly warnings. This should no longer occur.
+
 0.141760  2014-06-25 20:45:27UTC+0000 UTC
 
     * Bugfix: "Fixes" a problem with colorist.t hanging on Win32. The fix is
