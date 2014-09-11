@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.142540  2014-09-11 11:02:34-05:00 America/Chicago
+
     * Bugfix: Errors in rule sets choked when trying to call croak instead of
       croaking with a nice error describing the problem.
     * Bugfix: Optional matches can leave indexes in @- and @+ as undef, which
