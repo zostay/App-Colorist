@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+    * Bugfix: Errors in rule sets choked when trying to call croak instead of
+      croaking with a nice error describing the problem.
     * Bugfix: Optional matches can leave indexes in @- and @+ as undef, which
       caused colorist to spew ugly warnings. This should no longer occur.
 
