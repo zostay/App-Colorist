@@ -354,7 +354,7 @@ sub load_ruleset_file {
             ruleset;
         use App::Colorist::Ruleset;
         $rules = do "$ruleset_file"
-            or croak(qq[Failed to read rule set "$ruleset_file": $@]);
+            or Carp::croak(qq[Failed to read rule set "$ruleset_file": $@]);
         push @$rules, qr{.*}, [ 'DEFAULT' ];
     }
 
