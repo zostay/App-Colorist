@@ -610,19 +610,19 @@ sub readline {
 
             # Read it until we run out of input or until we hit at least one newline
             my ($eof, $buffer);
-            do {
+            READ: while (!defined $eof || ($eof != 0 && $line !~ /\n/)) {
                 $eof = sysread($fh, $buffer, 1024);
                 if (not defined $eof) {
                     if ($! == POSIX::EAGAIN) {
                         select undef, undef, undef, 0.1;
-                        next;
+                        next READ;
                     }
                     else {
                         croak("Error while reading handle: $!");
                     }
                 }
                 $line .= $buffer;
-            } while ($eof != 0 && $line !~ /\n/);
+            }
 
             $s->remove($fh) if $eof == 0;
 
